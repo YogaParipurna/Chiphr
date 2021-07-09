@@ -54,6 +54,8 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
+        // Program dibawah ini berfungsi untuk menyimpan tanggal ke sqlite yyyy-mm-dd.
+
         status = ""; tanggal = "";
 
         radio_status    = findViewById(R.id.radio_status);
@@ -74,26 +76,43 @@ public class EditActivity extends AppCompatActivity {
         rip_simpan      = findViewById(R.id.rip_simpan);
         // menghubungkan variable rip_simpan dengan componnen rip_simpan pada layout
 
+        //Perintah dibawah ini untuk input pemilihan data yang masuk dan keluar pada
+        //aplikasi
+
         sqliteHelper = new SqliteHelper(this);
         SQLiteDatabase database = sqliteHelper.getReadableDatabase();
+        // mengambil data dari database sql
         cursor = database.rawQuery(
                 "SELECT *, strftime('%d/%m/%Y', tanggal) AS tanggal FROM transaksi WHERE transaksi_id ='" + MainActivity.transaksi_id + "'"
+                // memberikan tangga; sesuai hari ini, yang berasal dari tabel transaksi dengan attribut transaksi_id
                 , null
         );
         cursor.moveToFirst();
+        //variable cursor akan berpindah ke pertama
 
         status = cursor.getString(1);
+        //
         switch (status){
+            // membuat swith case untuk variable status
             case "MASUK":
                 radio_masuk.setChecked(true); break;
+                // jika case masuk di centang maka akan terisi
             case "KELUAR":
                 radio_keluar.setChecked(true); break;
+                // jika case keluar di centang maka akan terisi
+
         }
 
+        // Pada radio_masuk user dapat memilih untuk pemasukan data yang diinput,
+        //sedangkan radio_keluar user dapat memilih untuk pengeluaran data yang
+        //diinput.
         radio_status.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                // berfungsi untuk merelasikan antara 2 radio button agar bisa di seleksi salah satu
+                //saja.
                 switch(checkedId){
+                    // membuat switch case untuk case masuk dan keluar
                     case R.id.radio_masuk:
                         status = "MASUK";
                         break;
@@ -112,6 +131,8 @@ public class EditActivity extends AppCompatActivity {
         tanggal = cursor.getString(4);
         edit_tanggal.setText( cursor.getString(5) );
 
+        //Variable ini dideklarasikan untuk menentukan tanggal yang akan diinput user
+        //sesuai data yang dimasukan dan dikeluarkan pada aplikasi.
         edit_tanggal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,12 +164,18 @@ public class EditActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Isi data dengan benar",
                             Toast.LENGTH_LONG).show();
                 } else {
+
+                    // Perintah dibawah ini menggunakan metode update dari open helper memanggil
+                    //metode update database, sehingga user tidak perlu menulis query SQL seluruhnya.
                     SQLiteDatabase database = sqliteHelper.getWritableDatabase();
                     database.execSQL(
                             "UPDATE transaksi SET status='" + status + "', jumlah='" + edit_jumlah.getText().toString() +
                                     "', " + "keterangan='" + edit_keterangan.getText().toString() + "', tanggal='" + tanggal +
                                     "' WHERE transaksi_id='" + MainActivity.transaksi_id + "'"
                     );
+                    // Untuk memberitahukan Informasi pada user, mengenai aksi yang akan di
+                    //eksekusi, berupa konfirmasi, pesan error atau pemberitahuan lainnya bisa
+                    //menggunakan Toast
                     Toast.makeText(getApplicationContext(), "Perubahan berhasil disimpan", Toast.LENGTH_LONG).show();
                     finish();
                 }

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AplikasiNabung-master.iml" filepath="$PROJECT_DIR$/.idea/modules/AplikasiNabung-master.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AplikasiNabung-master.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AplikasiNabung-master.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chiphr.iml" filepath="$PROJECT_DIR$/.idea/modules/Chiphr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Chiphr.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Chiphr.app.iml" />
     </modules>
   </component>
 </project>

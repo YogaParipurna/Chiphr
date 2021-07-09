@@ -11,6 +11,10 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+// Kelas ini merupakan kelas pembuka aplikasi yang utama. Splashscreen
+//digunakan untuk tampilan tambahan yang muncul saat pertama kali kita membuka
+//suatu aplikasi.
+
 public class SplashActivity extends AppCompatActivity {
 
     ImageView bgapp, clover;

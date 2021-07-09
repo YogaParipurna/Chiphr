@@ -16,6 +16,9 @@ import java.text.NumberFormat;
 
 import app.Chiphr.helper.CurrentDate;
 
+// Kelas ini berguna untuk menyaring data yang banyak agar mudah user
+//dalam mencari atau mengelompokkan data berdasarkan tanggal yang user
+//inginkan.
 
 public class FilterActivity extends AppCompatActivity {
 
@@ -43,6 +46,10 @@ public class FilterActivity extends AppCompatActivity {
         rip_filter  = findViewById(R.id.rip_filter);
         // menghubungkan variable rip_filter dengan componnen filter pada layout
 
+
+        //Perintah dibawah ini menggunakan DatePickerDialog sebagai komponen user
+        //interface. User dapat memilih tanggal, bulan dan tahun.
+        // disini data picker dari, diambil dari filter tanggal awal
         edit_dari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,9 +64,14 @@ public class FilterActivity extends AppCompatActivity {
                     }
                 }, CurrentDate.year, CurrentDate.month, CurrentDate.day);
                 datePickerDialog.show();
+                //Ketika user sedang memasukan data atau mengedit data user dapat mengubah
+                //tanggal,bulan,dan tahun menggunakan DatePickerDialog.
             }
         });
 
+        // Perintah dibawah ini menggunakan DatePickerDialog sebagai komponen user
+        // interface. User dapat memilih tanggal, bulan dan tahun.
+        // disini data picker dari, diambil dari filter tanggal ke tanggal akhir filter
         edit_ke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +86,8 @@ public class FilterActivity extends AppCompatActivity {
                     }
                 }, CurrentDate.year, CurrentDate.month, CurrentDate.day);
                 datePickerDialog.show();
+                // Ketika user sedang memasukan data atau mengedit data user dapat mengubah
+                //tanggal,bulan,dan tahun menggunakan DatePickerDialog.
             }
         });
 
@@ -104,3 +118,7 @@ public class FilterActivity extends AppCompatActivity {
         return true;
     }
 }
+
+//Dari program diatas user tidak hanya bisa memasukan dan mengedit tanggal tetapi
+//user juga dapat memfilter data menggunakan tanggal,bulan dan tahun yang sudah
+//diinput sesuai dengan keinginan user.

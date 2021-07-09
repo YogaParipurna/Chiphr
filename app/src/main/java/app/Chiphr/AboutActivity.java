@@ -22,9 +22,9 @@ public class AboutActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // membuat fungsi onlick pada button
                 Intent intent = new Intent(AboutActivity.this, MainActivity.class);
-                // saat diklik maka button yang terdapat di halaman about activity di klik, maka akan di arahkan
-                // ke halaman main activity
+                // membuat objek intent untuk berpindah activity aboutactivity ke main activity
                 startActivity(intent);
+                // berpindah ke Main activity
             }
         });
     }

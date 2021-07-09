@@ -40,6 +40,8 @@ public class AddActivity extends AppCompatActivity {
         status = "";
         sqliteHelper = new SqliteHelper(this);
 
+
+
         radio_status    = findViewById(R.id.radio_status);
         // menghubungkan variable radio_status dengan componnen radiostatus pada layout
         edit_jumlah     = findViewById(R.id.edit_jumlah);
@@ -51,6 +53,13 @@ public class AddActivity extends AppCompatActivity {
         rip_simpan      = findViewById(R.id.rip_simpan);
         // menghubungkan variable rip_simpan dengan componen rip_simpan pada layout
 
+        // FindViewById berfungsi untuk menentukan tampilan objek yang sifatnya
+        // penting saat membuat relative layout.
+
+        // Untuk membuat record pilihan penyimpanan data baru menggunakan perintah
+        //RadioGroup.OnCheckedChangeListener(). Radio button group ini
+        //berfungsi untuk merelasikan antara 2 radio button agar bisa di seleksi salah satu
+        //saja.
         radio_status.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
@@ -79,23 +88,32 @@ public class AddActivity extends AppCompatActivity {
         rip_simpan.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
             @Override
             public void onComplete(RippleView rippleView) {
+                // mengecek apakah isi dari status sudah sama denga data yang sudah di set
                 if (status.equals("") || edit_jumlah.getText().toString().equals("")){ // menyimpan input user di edittext jumlah kedalam variable edit_jumlah
-                    Toast.makeText(getApplicationContext(), "Isi data dengan benar",
+                    Toast.makeText(getApplicationContext(), "Isi data dengan benar", // jika salah akan menampilkan pesan  " isi data dengan benar"
                             Toast.LENGTH_LONG).show();
                 } else {
+
+                    // Perintah dibawah ini untuk memasukan status,jumlah dan keterangan pada aplikasi
                     SQLiteDatabase database = sqliteHelper.getWritableDatabase();
                     database.execSQL("INSERT INTO transaksi(status, jumlah, keterangan) VALUES('" +
+                            // menyimpan data di database dengan table transaksi
                             status + "','" +
                             edit_jumlah.getText().toString() + "','" +
                             edit_keterangan.getText().toString() + "')");
+                            // menyimpan data seuai nama variable
                     Toast.makeText(getApplicationContext(), "Transaksi berhasil disimpan", Toast.LENGTH_LONG).show();
+                    // jika benar menampilkan pesan " transaksi berhasil di simpan"
                     finish();
                 }
             }
         });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // menampilkan action bar
         getSupportActionBar().setTitle("Add");
+        //Perintah dibawah ini berfungsi untuk menambahkan data baru.
+
 
     }
 

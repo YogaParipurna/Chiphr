@@ -32,6 +32,9 @@ import app.Chiphr.helper.SqliteHelper;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Perintah dibawah  yaitu untuk mengatur database pada program dan untuk
+    // pemanggilan TextView, ListView, String, SqliteHelper dan Cursor.
+
     TextView text_masuk, text_keluar, text_total;
     // deklarasi variable untuk TextView
     ListView list_kas;
@@ -63,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
         transaksi_id = ""; tgl_dari = ""; tgl_ke = ""; query_kas = ""; query_total = "";  filter = false;
         sqliteHelper = new SqliteHelper(this);
 
+        //Perintah dibawah mendeklarasikan text_masuk, text_keluar, text_saldo,
+        //list_kas, text_filter.
+
         text_filter     = findViewById(R.id.text_filter);
         // menghubungkan variable text_filter dengan componnen text_filter pada layout
         text_masuk      = findViewById(R.id.text_masuk);
@@ -79,8 +85,11 @@ public class MainActivity extends AppCompatActivity {
         swipe_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                // Perintah untuk tanggal transaksi adalah sebagai berikut:
                 query_kas   =
                         "SELECT *, strftime('%d/%m/%Y', tanggal) AS tgl FROM transaksi ORDER BY transaksi_id DESC";
+
+                //Perintah untuk total pemasukan dan pengeluaran adalah sebagai berikut :
                 query_total =
                         "SELECT SUM(jumlah) AS total, " +
                                 "(SELECT SUM(jumlah) FROM transaksi WHERE status='MASUK') AS masuk, " +
@@ -119,6 +128,9 @@ public class MainActivity extends AppCompatActivity {
         for (i=0; i < cursor.getCount(); i++){
             cursor.moveToPosition(i);
 
+            // Perintah dibawah merupakan hashmap yaitu sebuah class yang berisi sekumpulan
+            // pasangan nilai (value) dan kunci (key) untuk menampilkan data
+
             HashMap<String, String> map = new HashMap<String, String>();
             map.put("transaksi_id", cursor.getString(0) );
             map.put("status",       cursor.getString(1) );
@@ -127,6 +139,8 @@ public class MainActivity extends AppCompatActivity {
             map.put("tanggal",      cursor.getString(5) );
             aruskas.add(map);
         }
+        // Hashmap diatas terdiri dari transaksi_id, status, jumlah, keterangan dan
+        //tanggal.
 
         if (i == 0){
             Toast.makeText(getApplicationContext(), "Tidak ada transaksi untuk ditampilkan",
@@ -199,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Perintah dibawah ini untuk membuat pilihan menu edit dan hapus.
     private void ListMenu(){
 
         final Dialog dialog = new Dialog(MainActivity.this);
@@ -226,6 +241,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    // Perintah untuk hapus data
     private void Hapus(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Konfirmasi");
@@ -234,6 +251,9 @@ public class MainActivity extends AppCompatActivity {
                 "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        //Perintah diatas merupakan code untuk penghapusan data jika data yakin ingin
+                        //dihapus pilih YES.
+
                         dialog.dismiss();
 
                         SQLiteDatabase database = sqliteHelper.getWritableDatabase();
@@ -242,9 +262,12 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
 
                         KasAdapter();
-
                     }
                 });
+        //Toast diatas merupakan salah satu widget yang digunakan untuk menampilkan
+        // pesan berupa text. Perintah diatas merupakan source code
+        //untuk jika pengapusan berhasil maka akan muncul komentar bahwa data transaksi
+        //berhasil dihapus.
 
         builder.setNegativeButton(
                 "No",
@@ -253,10 +276,14 @@ public class MainActivity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
-
         builder.show();
     }
+    //Perintah diatas merupakan code untuk penghapusan data jika data yakin ingin
+    //dihapus pilih NO.
 
+    //Perintah getMenuInflater().inflate(R.menu.menu_main,
+    //menu); berfungsi untuk memanggil menu option tampilan yang muncul ketika
+    //ditekan tombol menu pada device android
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -264,6 +291,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //Perintah onOptionsItemSelected berfungsi agar berhasil dalam menangani
+    //sebuah item menu dan dideklarasikan dengan menambahkan return true;.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
