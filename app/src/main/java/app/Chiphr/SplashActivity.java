@@ -11,21 +11,49 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-// Kelas ini merupakan kelas pembuka aplikasi yang utama. Splashscreen
-//digunakan untuk tampilan tambahan yang muncul saat pertama kali kita membuka
-//suatu aplikasi.
-
+/**
+ * Kelas ini merupakan kelas pembuka aplikasi yang utama. Splashscreen
+ * digunakan untuk tampilan tambahan yang muncul saat pertama kali kita membuka
+ * suatu aplikasi.
+ */
 public class SplashActivity extends AppCompatActivity {
 
-    ImageView bgapp, clover;
-    // deklarasi variable untuk ImagaeView
-    LinearLayout textsplash, texthome, menus;
-    // deklarasi variable untuk LinearLayout
-    Animation frombottom;
-    // deklarasi variable untuk Animation
-    private Button button;
-    private Button button2;
+    /**
+     * deklarasi variable untuk ImagaeView
+     */
+    ImageView bgapp;
+    /**
+     * deklarasi variable untuk ImagaeView
+     */
+    ImageView clover;
 
+    /**
+     * deklarasi variable untuk LinearLayout
+     */
+    LinearLayout textsplash;
+    /**
+     * deklarasi variable untuk LinearLayout
+     */
+    LinearLayout texthome;
+    /**
+     * deklarasi variable untuk LinearLayout
+     */
+    LinearLayout menus;
+
+    /**
+     * deklarasi variable untuk Animation
+     */
+    Animation frombottom;
+
+    /**
+     * deklarasi variabel untuk button dengan jenis privat
+     */
+    private Button button;
+
+    /**
+     * @description dalam method onCreate kondisi awal saat Activity baru diciptakan, biasanya dilakukan inisialisasi pada tahapan ini
+     * @param savedInstanceState digunakan untuk menyimpan state dari halaman sebelumnya
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,19 +77,23 @@ public class SplashActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-            });
+            public void onClick(View v) {
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
         button = (Button) findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
+            /**
+             * membuat fungsi onlick pada button
+             * @param v digunakan untuk mendeteksi tampilan yang diklik sehingga OnClickListener dapat diterapkan
+             */
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SplashActivity.this, AboutActivity.class);
                 startActivity(intent);
             }
         });
-}
     }
+}
 

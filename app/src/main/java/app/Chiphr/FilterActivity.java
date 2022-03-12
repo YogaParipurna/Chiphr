@@ -20,20 +20,44 @@ import app.Chiphr.helper.CurrentDate;
 //dalam mencari atau mengelompokkan data berdasarkan tanggal yang user
 //inginkan.
 
+/**
+ * @description Class ini berfungsi untuk menyaring data agar user mudah dalam mencari atau mengelompokkan data berdasarkan tanggal yang user inginkan
+ */
 public class FilterActivity extends AppCompatActivity {
 
+    /**
+     * deklarasi variable EditText untuk digunakan untuk mengedit tanggal awal dan akhir
+     */
     EditText edit_dari, edit_ke;
     // deklarasi variable untuk EditText
+    /**
+     * deklarasi variable Button untuk digunakan untuk memfilter data
+     */
     Button btn_filter;
     // deklarasi variable untuk Button
+
+    /**
+     * deklarasi variable RippleView untuk digunakan sebagai effect tambahan ketika memfilter data
+     */
     RippleView rip_filter;
     // deklarasi variable untuk Riplleview
 
+    /**
+     * deklarasi variable DatePickerDialog untuk digunakan untuk memilih tanggal
+     */
     DatePickerDialog datePickerDialog;
     // deklarasi variable untuk DataPickerDialog
 
+    /**
+     * Menampilkan Layout activity_filter
+     * dan memproses inputan dari Edit_dari
+     * @description dalam method onCreate kondisi awal saat Activity baru diciptakan, biasanya dilakukan inisialisasi pada tahapan ini
+     * @param savedInstanceState untuk memulihkan diri ke keadaan sebelumnya menggunakan data yang disimpan dalam bundel ini.
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter);
 
@@ -50,10 +74,24 @@ public class FilterActivity extends AppCompatActivity {
         //Perintah dibawah ini menggunakan DatePickerDialog sebagai komponen user
         //interface. User dapat memilih tanggal, bulan dan tahun.
         // disini data picker dari, diambil dari filter tanggal awal
+
         edit_dari.setOnClickListener(new View.OnClickListener() {
+            /**
+             * menampilkan kalender untuk memilik tanggal yang dibutuhkan
+             * seperti tahun,bulan, dan hari
+             * @param v untuk menampilkan objek tesebut
+             */
             @Override
             public void onClick(View v) {
                 datePickerDialog = new DatePickerDialog(FilterActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    /**
+                     * mengkonfirmasi pilihan tanggal awal filter yang dipilih menjadi bilangan desimal
+                     * lalu menyusun huruf tadi menjadi  format (hari/bulan/ tahun)
+                     * @param view untuk menampilkan pemilihan tanggal
+                     * @param year mendeklarasikan tahun
+                     * @param month_of_year mendeklarasikan bulan
+                     * @param day_of_month  mendeklarsikan hari
+                     */
                     @Override
                     public void onDateSet(DatePicker view, int year, int month_of_year, int day_of_month) {
                         NumberFormat numberFormat = new DecimalFormat("00");
@@ -73,9 +111,22 @@ public class FilterActivity extends AppCompatActivity {
         // interface. User dapat memilih tanggal, bulan dan tahun.
         // disini data picker dari, diambil dari filter tanggal ke tanggal akhir filter
         edit_ke.setOnClickListener(new View.OnClickListener() {
+            /**
+             * menampilkan kalender untuk memilik tanggal yang dibutuhkan
+             * seperti tahun,bulan, dan hari
+             * @param v untuk menampilkan objek tesebut
+             */
             @Override
             public void onClick(View v) {
                 datePickerDialog = new DatePickerDialog(FilterActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    /**
+                     * mengkonfirmasi pilihan tanggal akhir filter yang dipilih menjadi bilangan desimal
+                     * lalu menyusun huruf tadi menjadi  format (hari/bulan/ tahun)
+                     * @param view untuk menampilkan pemilihan tanggal
+                     * @param year mendeklarasikan tahun
+                     * @param month_of_year mendeklarasikan bulan
+                     * @param day_of_month mendeklarasikan Hari
+                     */
                     @Override
                     public void onDateSet(DatePicker view, int year, int month_of_year, int day_of_month) {
                         NumberFormat numberFormat = new DecimalFormat("00");
@@ -92,6 +143,13 @@ public class FilterActivity extends AppCompatActivity {
         });
 
         rip_filter.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+            /**
+             * saat edit_dari dan edit_ke salah di input maka akan muncul Toast yang isinya
+             * "Isi data dengan benar"
+             * dan jika benar makan akan memunculkan data pulsa yang telah difilter tadi
+             * lalu akan memunculkan masin Activity
+             * @param rippleView mendelkarsikan ripple view, yang digunakan untuk efek tambahan
+             */
             @Override
             public void onComplete(RippleView rippleView) {
                 if (edit_dari.getText().toString().equals("") || edit_ke.getText().toString().equals("")){
@@ -112,6 +170,10 @@ public class FilterActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @return disini jika data yang disimpan teridentifikasi benar , makan akan tersimpan
+     */
     @Override
     public boolean onSupportNavigateUp(){
         finish();

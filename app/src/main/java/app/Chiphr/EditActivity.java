@@ -24,31 +24,71 @@ import app.Chiphr.helper.CurrentDate;
 import app.Chiphr.helper.SqliteHelper;
 
 
+/**
+ *@description Class ini berfungsi untuk mengedit data pada halaman aplikasi sebagai tempat interaksi antara pengguna dengan aplikasi
+ */
 public class EditActivity extends AppCompatActivity {
 
-    RadioGroup radio_status;
+    /**
+     * deklarasi variable RadioGroup digunakan untuk status radio grup
+     */
+    RadioGroup  radio_status;
     // deklarasi variable untuk RadioGroup
+    /**
+     *deklarasi variable RadioButton digunakan untuk radio masuk dan radio keluar
+     */
     RadioButton radio_masuk, radio_keluar;
     // deklarasi variable untuk RadioButton
 
+    /**
+     *deklarasi variable EditText digunakan untuk mengedit jumlah, keterangan, tanggal
+     */
     EditText edit_jumlah, edit_keterangan, edit_tanggal;
     // deklarasi variable untuk EditText
+
+    /**
+     * deklarasi variable Button digunakan untuk menyimpan data
+     */
     Button btn_simpan;
     // deklarasi variable untuk Button
+
+    /**
+     * deklarasi variable RippleView untuk digunakan sebagai effect tambahan ketika menyimpan data
+     */
     RippleView rip_simpan;
     // deklarasi variable untuk RippleView
 
+    /**
+     *deklarasi variabel filter dengan tipe data sqliteHelp
+     */
     SqliteHelper sqliteHelper;
     // deklarasi variable untuk SqlLiteHelper
+
+    /**
+     * deklarasi variabel filter dengan tipe data Cursor
+     */
     Cursor cursor;
     // deklarasi variable untuk Cursor
 
+    /**
+     * deklarasi variable status dan tanggal type data string
+     */
     String status, tanggal;
     // deklarasi variable untuk String
 
+    /**
+     ** deklarasi variable DataPickerDialog type data DataPickerDialog
+     */
     DatePickerDialog datePickerDialog;
     // deklarasi variable untuk DataPickerDialog
 
+    /**
+     * @param savedInstanceState
+     * @param onCheckedChanged berfungsi untuk merelasikan antara 2 radio button agar bisa di seleksi salah satu
+     * @param onClick berfungsi untuk deklarasi variabel dari RadioGroup
+     * @param onComplete berfungsi untuk update dan memanggil
+     * @param onSupportNavigateUp berfungsi untuk kembali
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,10 +136,10 @@ public class EditActivity extends AppCompatActivity {
             // membuat swith case untuk variable status
             case "MASUK":
                 radio_masuk.setChecked(true); break;
-                // jika case masuk di centang maka akan terisi
+            // jika case masuk di centang maka akan terisi
             case "KELUAR":
                 radio_keluar.setChecked(true); break;
-                // jika case keluar di centang maka akan terisi
+            // jika case keluar di centang maka akan terisi
 
         }
 
@@ -107,6 +147,11 @@ public class EditActivity extends AppCompatActivity {
         //sedangkan radio_keluar user dapat memilih untuk pengeluaran data yang
         //diinput.
         radio_status.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            /**
+             * berfungsi untuk merelasikan antara 2 radio button agar bisa di seleksi salah satu
+             * @param group menginisiasi radio button
+             * @param checkedId berfungsi untuk merelasikan antara 2 radio button agar bisa di seleksi salah satu saja.
+             */
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 // berfungsi untuk merelasikan antara 2 radio button agar bisa di seleksi salah satu
@@ -152,12 +197,18 @@ public class EditActivity extends AppCompatActivity {
         });
 
         btn_simpan.setOnClickListener(new View.OnClickListener() {
+            /**
+             * @param v menginisiasi view sebagai tampilan
+             */
             @Override
             public void onClick(View v) {
             }
         });
 
         rip_simpan.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+            /**
+             * @param rippleView berfungsi untuk update dan memanggil
+             */
             @Override
             public void onComplete(RippleView rippleView) {
                 if (status.equals("") || edit_jumlah.getText().toString().equals("")){ // menyimpan input user di edittext jumlah kedalam variable edit_jumlah
@@ -186,9 +237,13 @@ public class EditActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Edit");
     }
 
+    /**
+     * @return berfungsi untuk kembali
+     */
     @Override
     public boolean onSupportNavigateUp(){
         finish();
         return true;
     }
 }
+

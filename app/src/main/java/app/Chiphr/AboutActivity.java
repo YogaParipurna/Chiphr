@@ -7,10 +7,21 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * @description Class ini berfungsi untuk menampilkan informasi mengenai aplikasi ini
+ */
 public class AboutActivity extends AppCompatActivity {
+
+    /**
+     * deklarasi variable Button untuk digunakan untuk kembali ke halaman utama
+     */
     private Button button;
     // deklarasi variable untuk button
 
+    /**
+     * @description dalam method onCreate kondisi awal saat Activity baru diciptakan, biasanya dilakukan inisialisasi pada tahapan ini
+     * @param savedInstanceState digunakan untuk menyimpan state dari halaman sebelumnya
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,14 +29,19 @@ public class AboutActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.backh);
         // membuat button dengan nama attribut backh
         button.setOnClickListener(new View.OnClickListener() {
+            /**
+             * membuat fungsi onlick pada button
+             * @param v digunakan untuk mendeteksi tampilan yang diklik sehingga OnClickListener dapat diterapkan
+             */
             @Override
+            // membuat fungsi onlick pada button
             public void onClick(View v) {
-                // membuat fungsi onlick pada button
-                Intent intent = new Intent(AboutActivity.this, MainActivity.class);
                 // membuat objek intent untuk berpindah activity aboutactivity ke main activity
-                startActivity(intent);
+                Intent intent = new Intent(AboutActivity.this, MainActivity.class);
                 // berpindah ke Main activity
+                startActivity(intent);
             }
         });
     }
 }
+
